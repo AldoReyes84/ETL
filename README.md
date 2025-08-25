@@ -15,3 +15,12 @@ ODBC Source
 New, Add Server and Table
 
 <img width="873" height="731" alt="image" src="https://github.com/user-attachments/assets/29a20f14-913a-4892-9096-4089a1b3a81e" />
+
+
+# Create a fake daily Internet Sales report file
+
+Prepare a review of the field we will create 
+
+I used the Excel Data Model connected to Adventureworks FactInternetSales table to prepare the parameter to use Python Faker to create some random InternetSales data. 
+
+<img width="1292" height="641" alt="image" src="https://github.com/user-attachments/assets/8f23bd6f-329b-4c15-a560-368796ea4847" />
