@@ -224,9 +224,21 @@ On the Data Flow Task add a Flat File, select one of the FakeOrder files and acc
 
 Compare the FactInternetSales2 table and the FakeOrder files headers 
 
-The First fields match ok 
+The first fields match ok 
 
 <img width="1296" height="171" alt="image" src="https://github.com/user-attachments/assets/def60e63-f00c-44b7-9fe5-3086c9256f18" />
+
+Lets create the missing fields and set the RevisoryNumber as RevisionNumber and value set as 1 
+
+<img width="1038" height="673" alt="image" src="https://github.com/user-attachments/assets/98bbd715-1f8f-4f37-ab10-f9c6b0eb1cd8" />
+
+Lets review the source data tipes 
+
+<img width="338" height="514" alt="image" src="https://github.com/user-attachments/assets/ed9f1535-5621-4be8-94ad-b9c496ed461e" />
+
+And make them match with a Data Convertion Transformation
+
+<img width="979" height="805" alt="image" src="https://github.com/user-attachments/assets/19e1babd-0080-47f8-b4eb-c2abbb82c8a4" />
 
 
 Add a OLE DB Source to integrate FactInternetSales2
