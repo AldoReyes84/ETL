@@ -240,15 +240,31 @@ And make them match with a Data Convertion Transformation
 
 <img width="979" height="805" alt="image" src="https://github.com/user-attachments/assets/19e1babd-0080-47f8-b4eb-c2abbb82c8a4" />
 
+Lets Add a Conditional Split to separate all the NULLS althought there are no null given the faker doesn´t add nulls, the DataBase has NOTNULL condition 
 
-Add a OLE DB Source to integrate FactInternetSales2
-
-<img width="343" height="224" alt="image" src="https://github.com/user-attachments/assets/bb1de104-795a-4d29-8582-9ecacb2dcb34" />
-
-Connect to our SSMS Server and our DataBase AdventureWorksDW2022
-
-<img width="873" height="731" alt="image" src="https://github.com/user-attachments/assets/29a20f14-913a-4892-9096-4089a1b3a81e" />
+<img width="1120" height="392" alt="image" src="https://github.com/user-attachments/assets/c12d1cf9-4a9e-478f-a569-3a5e3045fbb2" />
 
 
+Add a OLE DB Destinaton, match the default exit for the Conditional Split to it and select FactInternetSales2 table as destination
+ 
+
+<img width="1064" height="554" alt="image" src="https://github.com/user-attachments/assets/e29eae4c-9f83-4bca-b7e6-254dffd7c71f" />
+
+The Mapping detects all the fields by defaul.
+
+<img width="743" height="635" alt="image" src="https://github.com/user-attachments/assets/098f3abe-da07-4128-bcd8-b08a6713b890" />
+
+Now Lets create a Audit table for our Integration Pakage
+
+Create a table on our DataBase
+
+                CREATE TABLE AuditLog (
+                AuditID INT IDENTITY(1,1) PRIMARY KEY,
+                FileName NVARCHAR(255),
+                LoadDate DATETIME,
+                RowCount INT,
+                Status NVARCHAR(50),
+                ErrorMessage NVARCHAR(MAX)
+                );
 
 
