@@ -209,9 +209,25 @@ end_date will be provided manually to determin how many daily files will this sc
 
 In Visual Studion 2022 create an Integreation Project
 
-Create a New Data Flow Task
+Create a New - Foreach Loop Container, set up for Foreach File Emulator, provide the Path to our Faker csv files folder, assign a variable and inside add a Data Flow Task 
 
-<img width="644" height="292" alt="image" src="https://github.com/user-attachments/assets/a5fabbf1-c108-4577-87a8-670b4da7a001" />
+<img width="1159" height="718" alt="image" src="https://github.com/user-attachments/assets/2270bb45-8a73-4cd2-b01f-92337eae2b79" />
+
+
+<br>
+
+On the Data Flow Task add a Flat File, select one of the FakeOrder files and accept to create a new connection 
+
+<img width="886" height="746" alt="image" src="https://github.com/user-attachments/assets/6b42d48b-119c-4522-a0b2-c79fc1a061af" />
+
+### Prepare the Data Transformation
+
+Compare the FactInternetSales2 table and the FakeOrder files headers 
+
+The First fields match ok 
+
+<img width="1296" height="171" alt="image" src="https://github.com/user-attachments/assets/def60e63-f00c-44b7-9fe5-3086c9256f18" />
+
 
 Add a OLE DB Source to integrate FactInternetSales2
 
