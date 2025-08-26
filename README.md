@@ -16,7 +16,11 @@ Create an Integreation package that updates a copy of the FactInternet Sales tab
 
 I used the Excel Data Model connected to Adventureworks FactInternetSales table to prepare the parameter to use Python Faker to create some random InternetSales data. 
 
-<img width="1292" height="641" alt="image" src="https://github.com/user-attachments/assets/8f23bd6f-329b-4c15-a560-368796ea4847" />
+<br>
+
+<img width="622" height="222" alt="image" src="https://github.com/user-attachments/assets/7e9e3e2c-a70b-4aaa-a17e-de7cf8a02555" />
+
+<br>
 
 We are no trying to recreate an exact structure the SQL table because we want to do some transforations in the SSIS Data Flow. The last five fields will be added in the transformation step. 
 
