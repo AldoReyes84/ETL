@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+    <!-- Add any other CSS or meta tags you need -->
+  </head>
+  <body>
+    <!-- <div class="wrapper">  -->
+     <header>
+      <h1> 
+       <a href= "https://aldoreyes84.github.io/AldoReyes.github.io"/>
+        AldoReyes.github.io
+       </a>
+      </h1>
+        {% if site.logo %}
+      <img src="{{ site.logo }}" alt="logo" class="site-logo">
+      {% endif %}
+        
+        <p class="view">
+          <a href="https://github.com/AldoReyes84/working_experience">
+          View the Project on GitHub
+          <small>AldoReyes84/Working Experience</small>
+         </a> 
+        </p>
+
+        <h3 id="Aldo Reyes Portfolio">
+          <a href="https://aldoreyes84.github.io/AldoReyes.github.io"/>
+          Aldo Reyes Portfolio
+          </a>
+        </h3>
+        
+        <h2>{{ site.title }}
+        </h2>
+       
+        <h3>
+         <p>
+          <a href="#Intel Project Analyst">
+              Intel Project Analyst
+           <small> Nov 2022 to Mar 2025  </small>
+          </a>
+         </p>
+        </h3>
+       
+        <h4>
+           <a href="#certified-instructor-program-dashboard">
+        Certified Instructor Program Dashboard
+         </a>
+             <ul>
+        <li><a href="#applicants-pipeline"> Applicants Pipeline</a></li>
+        <li><a href="#program-overview"> Program Overview</a></li>
+        <li><a href="#instructors-activity"> Instructors Activity</a></li>
+      </ul>  
+        </h4>
+
+        <h4>
+           <a href="#workshop-quality-survey-dashboard">
+        Workshop Quality Survey Dashboard
+         </a>
+       </h4>
+       
+        <h4>
+          <a href="developers-trained-dashboard">
+        Developers Trained Dashboard
+          </a>
+        </h4>
+       
+         <h4>   
+          <a href=#docebo-lms-dashboard">
+        Docebo LMS Dashboard
+          </a>
+        </h4>
+
+      <h3>
+         <p>
+          <a href="#Intel Project Analyst">
+              Conagra Sales Analyst
+           <small> Mar 2017 to Jan 2020  </small>
+          </a>
+         </p>
+        </h3>
+            
+ 
+      <footer>
+        <p>This project is maintained by 
+        <a href="https://github.com/AldoReyes84">
+          AldoReyes84
+        </a>
+        </p>
+        <p>
+            <small>Hosted on GitHub Pages — Theme by
+           <a href="https://github.com/orderedlist">
+          orderedlist
+            </a>
+          </small>
+        </p>
+      </footer>
+      </header>
+        <section>
+       {{ content }}
+        </section> 
+       <!--  </div>   --> 
+  </body>
+</html>
