@@ -110,13 +110,28 @@ end_date will be provided manually to determin how many daily files will this sc
 
         order_id = f"SO{order_counter}"
 
+        tax_rate = Decimal('0.08')
+
+        order_date = current_date.date()
         order_date_key = int(current_date.strftime('%Y%m%d'))  # Formato YYYYMMDD como entero
 
-        tax_rate = Decimal('0.08')
+### Generate DueDate: OrderDate + 4 to 30 days
+     
+        due_date = order_date + timedelta(days=random.randint(4, 30))
+        due_date_key = int(due_date.strftime('%Y%m%d'))
+
+### Generate ShipDate: DueDate + 2 to 15 days
+  
+        ship_date = due_date + timedelta(days=random.randint(2, 15))
+        ship_date_key = int(ship_date.strftime('%Y%m%d'))
+
+### Create Fields Dictionary
 
         orders.append({
             'ProductKey': product_key,                                # Product identifier
             'OrderDateKey': order_date_key,                           # Order date as integer YYYYMMDD
+            'DueDateKey': due_date_key,                               # Due date as integer YYYYMMDD
+            'ShipDateKey': ship_date_key,                             # Ship date as integer YYYYMMDD
             'CustomerKey': random.randint(11000, 29483),              # Customer identifier
             'PromotionKey': random.choice(promotion_options),         # Promotion applied
             'CurrencyKey': random.choice(currency_options),           # Currency used
@@ -132,9 +147,12 @@ end_date will be provided manually to determin how many daily files will this sc
             'TotalProductCost': price_info['ProductStandardCost'],    # Total product cost = ProductStandardCost
             'SalesAmount': price_info['UnitPrice'],                   # Sales amount = UnitPrice
             'TaxAmount': price_info['UnitPrice'] * Decimal('0.08'),   # Tax amount = 8% of SalesAmount
-            'Freight': None,                                          # Freight requires another DB for practical purposes we                                                                       won't implement it here
+            'Freight': None,                                          # Freight requires another DB for practical purposes won't implement it here
             'OrderDate': current_date.date(),                         # Date of the order
-             })
+            'DueDate': due_date,                                     # Due date
+            'ShipDate': ship_date,                                   # Ship date
+        })
+            
         order_counter += 1  # Increment global order ID
 
         current_date += timedelta(days=1)  # Move to the next day
