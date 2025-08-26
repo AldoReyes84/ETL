@@ -254,17 +254,14 @@ The Mapping detects all the fields by defaul.
 
 <img width="743" height="635" alt="image" src="https://github.com/user-attachments/assets/098f3abe-da07-4128-bcd8-b08a6713b890" />
 
-Now Lets create a Audit table for our Integration Pakage
+Lets Create a File System Task to move the loaded files to a Backup folder
 
-Create a table on our DataBase
+Create Variables needed
 
-                CREATE TABLE AuditLog (
-                AuditID INT IDENTITY(1,1) PRIMARY KEY,
-                FileName NVARCHAR(255),
-                LoadDate DATETIME,
-                RowCount INT,
-                Status NVARCHAR(50),
-                ErrorMessage NVARCHAR(MAX)
-                );
+<img width="715" height="216" alt="image" src="https://github.com/user-attachments/assets/bc7dd020-98e6-43e9-a95d-a35a28400385" />
+
+Setup System File Task with the Destination and Source Full Paths we set as Variables
+
+<img width="992" height="378" alt="image" src="https://github.com/user-attachments/assets/345db548-cd0c-4c70-82f5-15722907b4af" />
 
 
