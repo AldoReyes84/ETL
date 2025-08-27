@@ -1,6 +1,6 @@
-# ETL
+# ETL Pipeline: Fake Internet Sales Data Integration
 
-Create an Integreation package that updates a copy of the FactInternet Sales table  with Face Sales Data createed in Python
+This project generates synthetic daily Internet Sales data using Python and loads it into a SQL Server table (FactInternetSales2) via an SSIS package. The goal is to simulate realistic ETL workflows for testing, transformation, and automation purposes
 
 ## Create a copy table for SQL Server AdventureWorksDW2022.FactInternetSales table.
 
@@ -29,6 +29,9 @@ We are no trying to recreate an exact structure the SQL table because we want to
 -----------------
 
 ## Python
+
+The Python script connects to the AdventureWorksDW2022 database, retrieves metadata from FactInternetSales2 and DimProduct, and generates daily CSV files with randomized sales data using pandas, random, and Faker.
+
 
 ### Import Liberies
 
@@ -207,61 +210,86 @@ end_date will be provided manually to determin how many daily files will this sc
 -------
 ## SQL Server Integration Services (SSIS)
 
-In Visual Studion 2022 create an Integreation Project
+Built in Visual Studio 2022, this SSIS package ingests the generated CSV files, transforms the data, and loads it into FactInternetSales2.
 
-Create a New - Foreach Loop Container, set up for Foreach File Emulator, provide the Path to our Faker csv files folder, assign a variable and inside add a Data Flow Task 
+
+### Extract
+
+#### 1. Foreach Loop Container
+- Iterates through all files in the designated SourceFolder.
+- Dynamically assigns each file path to the FileName variable.
+- Constructs full paths for source and backup using FullSourcePath and FullBackupPath.
+ 
 
 <img width="1159" height="718" alt="image" src="https://github.com/user-attachments/assets/2270bb45-8a73-4cd2-b01f-92337eae2b79" />
 
 
 <br>
+#### 2. Data Flow Task
+Processes each file through the following components
 
-On the Data Flow Task add a Flat File, select one of the FakeOrder files and accept to create a new connection 
+ Add a Flat File, select one of the FakeOrder
 
 <img width="886" height="746" alt="image" src="https://github.com/user-attachments/assets/6b42d48b-119c-4522-a0b2-c79fc1a061af" />
 
-### Prepare the Data Transformation
+### Transform
 
 Compare the FactInternetSales2 table and the FakeOrder files headers 
 
 The first fields match ok 
-
 <img width="1296" height="171" alt="image" src="https://github.com/user-attachments/assets/def60e63-f00c-44b7-9fe5-3086c9256f18" />
 
-Lets create the missing fields and set the RevisoryNumber as RevisionNumber and value set as 1 
+#### 3. Derived Column
+
+Create the missing fields and set the RevisoryNumber as RevisionNumber and value set as 1 
 
 <img width="1038" height="673" alt="image" src="https://github.com/user-attachments/assets/98bbd715-1f8f-4f37-ab10-f9c6b0eb1cd8" />
 
-Lets review the source data tipes 
+Review the source data types 
 
 <img width="338" height="514" alt="image" src="https://github.com/user-attachments/assets/ed9f1535-5621-4be8-94ad-b9c496ed461e" />
 
-And make them match with a Data Convertion Transformation
+#### 4. Data Convertion
+
+Converts data types to match SQL Server schema
 
 <img width="979" height="805" alt="image" src="https://github.com/user-attachments/assets/19e1babd-0080-47f8-b4eb-c2abbb82c8a4" />
 
-Lets Add a Conditional Split to separate all the NULLS althought there are no null given the faker doesn´t add nulls, the DataBase has NOTNULL condition 
+#### 5. Conditional Split
+
+Filters out rows with NULLs (precautionary, due to NOT NULL constraints)
 
 <img width="1120" height="392" alt="image" src="https://github.com/user-attachments/assets/c12d1cf9-4a9e-478f-a569-3a5e3045fbb2" />
 
+### Load
 
-Add a OLE DB Destinaton, match the default exit for the Conditional Split to it and select FactInternetSales2 table as destination
+#### 6. OLE DB Destination
+
+Inserts valid rows into FactInternetSales2
  
-
 <img width="1064" height="554" alt="image" src="https://github.com/user-attachments/assets/e29eae4c-9f83-4bca-b7e6-254dffd7c71f" />
 
-The Mapping detects all the fields by defaul.
+The Mapping detects all the fields by defaul but the correct fields to ingest are the copies from Data Convertion
 
-<img width="743" height="635" alt="image" src="https://github.com/user-attachments/assets/098f3abe-da07-4128-bcd8-b08a6713b890" />
+<img width="754" height="636" alt="image" src="https://github.com/user-attachments/assets/20b9e652-77cb-4732-9a45-518c681d29ee" />
 
-Lets Create a File System Task to move the loaded files to a Backup folder
+#### 7. Flat File Destination 
+
+Captures rows that fail during insertion (e.g., due to truncation, null violations).
+
+<img width="1018" height="612" alt="image" src="https://github.com/user-attachments/assets/ebe26720-55ce-4ce8-abcc-fc2b57d85393" />
+
+#### 8. File System Task
+
+Moves successfully processed files from  to 
 
 Create Variables needed
 
 <img width="715" height="216" alt="image" src="https://github.com/user-attachments/assets/bc7dd020-98e6-43e9-a95d-a35a28400385" />
 
-Setup System File Task with the Destination and Source Full Paths we set as Variables
+Setup System File Task with the Destination and Source Full Paths we set as Variables and Operation to Move File
 
-<img width="992" height="378" alt="image" src="https://github.com/user-attachments/assets/345db548-cd0c-4c70-82f5-15722907b4af" />
+<img width="1008" height="422" alt="image" src="https://github.com/user-attachments/assets/5de79a67-45de-45fc-b2e3-f1a476e057e2" />
+
 
 
