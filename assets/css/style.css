@@ -10,7 +10,7 @@ body {
 
 header {
 	width: 300px;
-	position: sticky;
+	position: fixed;
 }
 
 section {
