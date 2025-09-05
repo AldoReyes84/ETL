@@ -8,6 +8,11 @@ body {
   	flex-wrap: wrap;
 }
 
+.wrapper{
+	width: 860px;
+	margin: 0 auto;
+}
+
 header {
 	width: 300px;
 	position: fixed;
